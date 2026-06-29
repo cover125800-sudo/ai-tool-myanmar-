@@ -41,20 +41,29 @@
       margin-left:auto;
       margin-right:auto;
       text-align:left;
-    }
-  </style>
-</head>
-<body>
+    .chat {
+  max-width: 700px;
+  margin: 20px auto;
+}
 
-<h1>🤖 AI Tool Myanmar</h1>
+.user {
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border-radius: 15px 15px 0 15px;
+  margin: 10px 0;
+  text-align: right;
+}
 
-<textarea id="prompt" placeholder="မေးချင်တာ ရိုက်ပါ..."></textarea><br>
+.ai {
+  background: #f1f5f9;
+  color: #111;
+  padding: 12px;
+  border-radius: 15px 15px 15px 0;
+  margin: 10px 0;
+  text-align: left;
+}
 
-<button onclick="askAI()">Send</button>
-
-<div id="result"></div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
+hr {
+  display: none;
+}
