@@ -12,6 +12,18 @@ export default async function handler(req, res) {
         "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
         "Content-Type": "application/json"
       },
+      if (!response.ok) {
+  return res.status(response.status).json(data);
+    }
+    const data = await response.json();
+
+if (!response.ok) {
+  return res.status(response.status).json(data);
+}
+
+res.status(200).json({
+  reply: data.choices?.[0]?.message?.content || "No response"
+});
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         messages: [
