@@ -2,12 +2,12 @@ async function askAI() {
   const prompt = document.getElementById("prompt").value;
   const result = document.getElementById("result");
 
-  if (!prompt) {
-    result.innerHTML = "ကျေးဇူးပြု၍ မေးခွန်းရိုက်ထည့်ပါ။";
-    return;
-  }
+  if (!prompt) return;
 
-  result.innerHTML = "⏳ AI စဉ်းစားနေပါတယ်...";
+  result.innerHTML += `<div><b>🧑 သင်:</b> ${prompt}</div>`;
+  document.getElementById("prompt").value = "";
+
+  result.innerHTML += `<div id="loading">🤖 AI စဉ်းစားနေပါတယ်...</div>`;
 
   try {
     const response = await fetch("/api/chat", {
@@ -19,8 +19,14 @@ async function askAI() {
     });
 
     const data = await response.json();
-    result.innerHTML = data.reply || data.error;
+
+    document.getElementById("loading").remove();
+
+    result.innerHTML += `<div><b>🤖 AI:</b> ${data.reply || data.error}</div><hr>`;
   } catch (err) {
-    result.innerHTML = "❌ Error: " + err.message;
+    document.getElementById("loading").remove();
+    result.innerHTML += `<div>❌ ${err.message}</div>`;
   }
+
+  result.scrollTop = result.scrollHeight;
 }
