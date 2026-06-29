@@ -9,6 +9,18 @@ async function askAI() {
 
   result.innerHTML = "⏳ AI စဉ်းစားနေပါတယ်...";
 
-  // Groq API ကို နောက်တစ်ဆင့်မှာ ချိတ်မယ်
-  result.innerHTML = "သင်ရေးထားသည်: " + prompt;
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ prompt })
+    });
+
+    const data = await response.json();
+    result.innerHTML = data.reply || data.error;
+  } catch (err) {
+    result.innerHTML = "❌ Error: " + err.message;
+  }
 }
