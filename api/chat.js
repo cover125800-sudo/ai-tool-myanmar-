@@ -3,50 +3,43 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { prompt } = req.body;
-
   try {
+    const { prompt } = req.body;
+
     const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
+        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
         "Content-Type": "application/json"
       },
-      if (!response.ok) {
-  return res.status(response.status).json(data);
-    }
-    const data = await response.json();
-
-if (!response.ok) {
-  return res.status(response.status).json(data);
-}
-
-res.status(200).json({
-  reply: data.choices?.[0]?.message?.content || "No response"
-});
       body: JSON.stringify({
         model: "llama-3.3-70b-versatile",
         messages: [
-  {
-    role: "system",
-    content: "You are a helpful AI assistant. Always reply in Myanmar language unless the user specifically asks for another language."
-  },
-  {
-    role: "user",
-    content: prompt
-  }
-]
-})
-});
+          {
+            role: "system",
+            content: "Reply in Myanmar language."
+          },
+          {
+            role: "user",
+            content: prompt
+          }
+        ]
+      })
+    });
 
     const data = await response.json();
 
-    res.status(200).json({
-      reply: data.choices?.[0]?.message?.content || "No response"
+    if (!response.ok) {
+      return res.status(500).json(data);
+    }
+
+    return res.status(200).json({
+      reply: data.choices[0].message.content
     });
-  } catch (error) {
-    res.status(500).json({
-      error: error.message
+
+  } catch (err) {
+    return res.status(500).json({
+      error: err.toString()
     });
   }
 }
