@@ -1,11 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Tool Myanmar</title>
-  <style>
-    <script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Tool Myanmar</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f5f5f5;
+    margin:0;
+    padding:20px;
+    text-align:center;
+}
+
+h1{
+    color:#2563eb;
+}
+
+textarea{
+    width:90%;
+    max-width:600px;
+    height:120px;
+    padding:10px;
+    font-size:16px;
+}
+
+button{
+    margin-top:10px;
+    padding:12px 20px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#chat{
+    max-width:700px;
+    margin:20px auto;
+    text-align:left;
+}
+
+.user{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+    border-radius:15px 15px 0 15px;
+    margin:10px 0;
+}
+
+.ai{
+    background:#f1f5f9;
+    color:#111;
+    padding:12px;
+    border-radius:15px 15px 15px 0;
+    margin:10px 0;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🤖 AI Tool Myanmar</h1>
+
+<div id="chat"></div>
+
+<textarea id="prompt" placeholder="မေးချင်တာ ရိုက်ပါ..."></textarea>
+<br>
+<button onclick="sendMessage()">Send</button>
+
+<script>
 async function sendMessage() {
     const promptBox = document.getElementById("prompt");
     const chat = document.getElementById("chat");
@@ -13,9 +80,8 @@ async function sendMessage() {
     const message = promptBox.value;
     if (!message) return;
 
-    // Show USER message (bubble)
+    // user message
     chat.innerHTML += `<div class="user">👤 ${message}</div>`;
-
     promptBox.value = "";
 
     try {
@@ -29,73 +95,14 @@ async function sendMessage() {
 
         const data = await res.json();
 
-        // Show AI message (bubble)
+        // AI reply
         chat.innerHTML += `<div class="ai">🤖 ${data.reply}</div>`;
-
-    } catch (err) {
+    }
+    catch (err) {
         chat.innerHTML += `<div class="ai">❌ Error: ${err.message}</div>`;
     }
 }
 </script>
-    body{
-      font-family:Arial,sans-serif;
-      background:#f5f5f5;
-      margin:0;
-      padding:20px;
-      text-align:center;
-    }
-    h1{
-      color:#2563eb;
-    }
-    textarea{
-      width:90%;
-      max-width:600px;
-      height:120px;
-      padding:10px;
-      font-size:16px;
-    }
-    button{
-      margin-top:10px;
-      padding:12px 20px;
-      background:#2563eb;
-      color:white;
-      border:none;
-      border-radius:8px;
-      font-size:16px;
-      cursor:pointer;
-    }
-    #result{
-      margin-top:20px;
-      background:white;
-      padding:15px;
-      border-radius:10px;
-      max-width:600px;
-      margin-left:auto;
-      margin-right:auto;
-      text-align:left;
-    .chat {
-  max-width: 700px;
-  margin: 20px auto;
-}
 
-.user {
-  background: #2563eb;
-  color: white;
-  padding: 12px;
-  border-radius: 15px 15px 0 15px;
-  margin: 10px 0;
-  text-align: right;
-}
-
-.ai {
-  background: #f1f5f9;
-  color: #111;
-  padding: 12px;
-  border-radius: 15px 15px 15px 0;
-  margin: 10px 0;
-  text-align: left;
-}
-
-hr {
-  display: none;
-}
+</body>
+</html>
