@@ -30,3 +30,8 @@ async function askAI() {
 
   result.scrollTop = result.scrollHeight;
 }
+
+function clearChat() {
+  document.getElementById("chat").innerHTML = "";
+  localStorage.removeItem("chatHistory");
+}
