@@ -119,3 +119,19 @@ button:hover{
     transform: rotate(360deg);
   }
 }
+
+#micBtn {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+#micBtn:hover {
+  background: #059669;
+}
