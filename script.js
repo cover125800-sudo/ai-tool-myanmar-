@@ -10,9 +10,7 @@ async function askAI() {
   result.innerHTML += `
 <div id="loading" class="loading">
   <span class="spinner"></span>
-  <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
-</div>
-`;
+  
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
