@@ -5,14 +5,13 @@ async function askAI() {
   const prompt = promptInput.value.trim();
   if (!prompt) return;
 
-  result.innerHTML += `<div><b>🧑 သင်:</b> ${prompt}</div>`;
-  promptInput.value = "";
+  result.innerHTML += `<div class="user-message">🧑 ${prompt}</div>`;
 
   const aiReply = data.reply || data.error;
 
-result.innerHTML += `<div id="ai-message"><b>🤖 AI:</b> <span id="typing"></span></div><hr>`;
+result.innerHTML += `<div class="ai-message">🤖 ${data.reply || data.error}</div>`;
 
-const typing = document.getElementById("typing");
+ document.getElementById("typing");
 let i = 0;
 
 const timer = setInterval(() => {
