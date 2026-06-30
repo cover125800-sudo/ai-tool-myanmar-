@@ -1,16 +1,22 @@
 async function askAI() {
-  const prompt = document.getElementById("prompt").value;
+  const promptInput = document.getElementById("prompt");
   const result = document.getElementById("result");
 
+  const prompt = promptInput.value.trim();
   if (!prompt) return;
 
   result.innerHTML += `<div><b>🧑 သင်:</b> ${prompt}</div>`;
-  document.getElementById("prompt").value = "";
+  promptInput.value = "";
 
   result.innerHTML += `
-<div id="loading" class="loading">
-  <span class="spinner"></span>
-  
+    <div id="loading" class="loading">
+      <span class="spinner"></span>
+      <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
+    </div>
+  `;
+
+  result.scrollTop = result.scrollHeight;
+
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -22,13 +28,17 @@ async function askAI() {
 
     const data = await response.json();
 
-    document.getElementById("loading").remove();
+    const loading = document.getElementById("loading");
+    if (loading) loading.remove();
 
     result.innerHTML += `<div><b>🤖 AI:</b> ${data.reply || data.error}</div><hr>`;
 
-localStorage.setItem("chatHistory", chat.innerHTML);
+    localStorage.setItem("chatHistory", result.innerHTML);
+
   } catch (err) {
-    document.getElementById("loading").remove();
+    const loading = document.getElementById("loading");
+    if (loading) loading.remove();
+
     result.innerHTML += `<div>❌ ${err.message}</div>`;
   }
 
@@ -36,46 +46,21 @@ localStorage.setItem("chatHistory", chat.innerHTML);
 }
 
 function clearChat() {
-  document.getElementById("chat").innerHTML = "";
+  const result = document.getElementById("result");
+  result.innerHTML = "";
   localStorage.removeItem("chatHistory");
 }
 
 window.onload = function () {
   const history = localStorage.getItem("chatHistory");
   if (history) {
-    document.getElementById("chat").innerHTML = history;
+    document.getElementById("result").innerHTML = history;
   }
 };
 
 document.getElementById("prompt").addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
-    sendMessage();
+    askAI();
   }
 });
-
-.loading {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px;
-  margin: 10px 0;
-  background: #f5f5f5;
-  border-radius: 10px;
-  font-size: 15px;
-}
-
-.spinner {
-  width: 18px;
-  height: 18px;
-  border: 3px solid #ddd;
-  border-top: 3px solid #4CAF50;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
