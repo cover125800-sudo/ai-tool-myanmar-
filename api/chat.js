@@ -1,7 +1,16 @@
 async function handleAIResponse(userMessage) {
 
-    const loadingHTML = `
-        <div id="ai-loading" class="flex items-start space-x-3">
+    content: `
+You are a helpful AI assistant inside a chat application.
+
+Rules:
+- Reply in the same language as the user.
+- Keep answers clear, simple, and useful.
+- If the user asks coding questions, give working examples.
+- If the user is confused, explain step by step.
+- Be friendly but not too long.
+- Do not hallucinate or give false information.
+`
             <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-sm text-white">AI</div>
             <div class="bg-gray-800 p-4 rounded-2xl rounded-tl-none shadow-md border border-gray-700 flex items-center h-10 px-6">
                 <div class="dot-flashing"></div>
