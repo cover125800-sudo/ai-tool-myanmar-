@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: "Reply in Myanmar language."
+            content: "Reply in the same language as the user's message."
           },
           {
             role: "user",
