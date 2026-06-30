@@ -1,32 +1,31 @@
-async function askAI() {
-  const promptInput = document.getElementById("prompt");
-  const result = document.getElementById("result");
+const chat = document.getElementById("chat");
+const prompt = document.getElementById("prompt");
 
-  const prompt = promptInput.value.trim();
-  if (!prompt) return;
+async function sendMessage() {
+  const message = prompt.value.trim();
+  if (!message) return;
 
-  result.innerHTML += `<div class="user-message">🧑 ${prompt}</div>`;
+  // User Message
+  chat.innerHTML += `
+    <div class="message user">
+      👤 ${message}
+    </div>
+  `;
 
-  const aiReply = data.reply || data.error;
+  prompt.value = "";
+  chat.scrollTop = chat.scrollHeight;
 
-result.innerHTML += `<div class="ai-message">🤖 ${data.reply || data.error}</div>`;
+  // Loading
+  chat.innerHTML += `
+    <div class="message ai" id="loading">
+      <div class="loading">
+        <span class="spinner"></span>
+        <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
+      </div>
+    </div>
+  `;
 
- document.getElementById("typing");
-let i = 0;
-
-const timer = setInterval(() => {
-  typing.textContent += aiReply.charAt(i);
-  i++;
-
-  result.scrollTop = result.scrollHeight;
-
-  if (i >= aiReply.length) {
-    clearInterval(timer);
-    localStorage.setItem("chatHistory", result.innerHTML);
-  }
-}, 20);
-
-  result.scrollTop = result.scrollHeight;
+  chat.scrollTop = chat.scrollHeight;
 
   try {
     const response = await fetch("/api/chat", {
@@ -34,44 +33,45 @@ const timer = setInterval(() => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt: message })
     });
 
     const data = await response.json();
 
-    const loading = document.getElementById("loading");
-    if (loading) loading.remove();
+    document.getElementById("loading").remove();
 
-    result.innerHTML += `<div><b>🤖 AI:</b> ${data.reply || data.error}</div><hr>`;
+    chat.innerHTML += `
+      <div class="message ai">
+        🤖 ${data.reply || data.error || "အဖြေမရပါ။"}
+      </div>
+    `;
 
-    localStorage.setItem("chatHistory", result.innerHTML);
+    localStorage.setItem("chatHistory", chat.innerHTML);
+    chat.scrollTop = chat.scrollHeight;
 
   } catch (err) {
-    const loading = document.getElementById("loading");
-    if (loading) loading.remove();
+    document.getElementById("loading").remove();
 
-    result.innerHTML += `<div>❌ ${err.message}</div>`;
+    chat.innerHTML += `
+      <div class="message ai">
+        ❌ ${err.message}
+      </div>
+    `;
   }
-
-  result.scrollTop = result.scrollHeight;
 }
 
-function clearChat() {
-  const result = document.getElementById("result");
-  result.innerHTML = "";
-  localStorage.removeItem("chatHistory");
-}
-
-window.onload = function () {
+// Chat History
+window.onload = () => {
   const history = localStorage.getItem("chatHistory");
   if (history) {
-    document.getElementById("result").innerHTML = history;
+    chat.innerHTML = history;
   }
 };
 
-document.getElementById("prompt").addEventListener("keydown", function (e) {
+// Enter Key
+prompt.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
-    askAI();
+    sendMessage();
   }
 });
