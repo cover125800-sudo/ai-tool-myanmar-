@@ -7,8 +7,12 @@ async function askAI() {
   result.innerHTML += `<div><b>🧑 သင်:</b> ${prompt}</div>`;
   document.getElementById("prompt").value = "";
 
-  result.innerHTML += `<div id="loading">🤖 AI စဉ်းစားနေပါတယ်...</div>`;
-
+  result.innerHTML += `
+<div id="loading" class="loading">
+  <span class="spinner"></span>
+  <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
+</div>
+`;
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
@@ -51,3 +55,29 @@ document.getElementById("prompt").addEventListener("keydown", function (e) {
     sendMessage();
   }
 });
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  margin: 10px 0;
+  background: #f5f5f5;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 3px solid #ddd;
+  border-top: 3px solid #4CAF50;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
