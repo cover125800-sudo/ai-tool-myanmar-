@@ -44,3 +44,10 @@ window.onload = function () {
     document.getElementById("chat").innerHTML = history;
   }
 };
+
+document.getElementById("prompt").addEventListener("keydown", function (e) {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
