@@ -75,3 +75,25 @@ prompt.addEventListener("keydown", function (e) {
     sendMessage();
   }
 });
+
+function startVoice() {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("ဒီ Browser က Voice Input ကို မထောက်ပံ့ပါ။");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "my-MM";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  recognition.onresult = function (event) {
+    prompt.value = event.results[0][0].transcript;
+    sendMessage();
+  };
+
+  recognition.start();
+}
