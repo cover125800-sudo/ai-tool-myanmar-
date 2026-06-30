@@ -5,7 +5,7 @@ async function sendMessage() {
   const message = prompt.value.trim();
   if (!message) return;
 
-  // User Message
+  // 1. User Message ကို visual ပေါ်ပြခြင်း
   chat.innerHTML += `
     <div class="message user">
       👤 ${message}
@@ -15,7 +15,7 @@ async function sendMessage() {
   prompt.value = "";
   chat.scrollTop = chat.scrollHeight;
 
-  // Loading
+  // 2. Loading ပြသခြင်း
   chat.innerHTML += `
     <div class="message ai" id="loading">
       <div class="loading">
@@ -24,10 +24,10 @@ async function sendMessage() {
       </div>
     </div>
   `;
-
   chat.scrollTop = chat.scrollHeight;
 
   try {
+    // 3. Vercel API ကို လှမ်းခေါ်ခြင်း (body မှာ prompt လို့ ပို့ထားပါတယ်)
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
@@ -38,8 +38,10 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    document.getElementById("loading").remove();
+    // Loading ကို ဖြုတ်ခြင်း
+    document.getElementById("loading")?.remove();
 
+    // 4. API က ပြန်ပေးတဲ့ အဖြေကို ယူပြီး visual အဖြစ် ထည့်သွင်းခြင်း
     chat.innerHTML += `
       <div class="message ai">
         🤖 ${data.reply || data.error || "အဖြေမရပါ။"}
@@ -50,17 +52,17 @@ async function sendMessage() {
     chat.scrollTop = chat.scrollHeight;
 
   } catch (err) {
-    document.getElementById("loading").remove();
-
+    document.getElementById("loading")?.remove();
     chat.innerHTML += `
       <div class="message ai">
         ❌ ${err.message}
       </div>
     `;
+    chat.scrollTop = chat.scrollHeight;
   }
 }
 
-// Chat History
+// Chat History စနစ်
 window.onload = () => {
   const history = localStorage.getItem("chatHistory");
   if (history) {
@@ -68,7 +70,7 @@ window.onload = () => {
   }
 };
 
-// Enter Key
+// Enter Key စနစ်
 prompt.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
@@ -76,6 +78,7 @@ prompt.addEventListener("keydown", function (e) {
   }
 });
 
+// Voice Input စနစ်
 function startVoice() {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -86,9 +89,11 @@ function startVoice() {
   }
 
   const recognition = new SpeechRecognition();
-  recognition.lang = "en-US"; // အရင်ဆုံး English နဲ့စမ်း
+  recognition.lang = "en-US";
   recognition.continuous = false;
   recognition.interimResults = false;
+
+  recognition.start();
 
   recognition.onresult = (event) => {
     prompt.value = event.results[0][0].transcript;
@@ -97,28 +102,4 @@ function startVoice() {
   recognition.onerror = (event) => {
     alert("Voice Error: " + event.error);
   };
-
-  recognition.start();
 }
-
-// Call backend API
-const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        prompt: userMessage
-    })
-});
-
-const data = await response.json();
-
-// Remove loading
-document.getElementById("ai-loading")?.remove();
-
-if (!response.ok) {
-    throw new Error(data.error || "API Error");
-}
-
-const aiReplyText = data.reply;
