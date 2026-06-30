@@ -23,6 +23,8 @@ async function askAI() {
     document.getElementById("loading").remove();
 
     result.innerHTML += `<div><b>🤖 AI:</b> ${data.reply || data.error}</div><hr>`;
+
+localStorage.setItem("chatHistory", chat.innerHTML);
   } catch (err) {
     document.getElementById("loading").remove();
     result.innerHTML += `<div>❌ ${err.message}</div>`;
@@ -35,3 +37,10 @@ function clearChat() {
   document.getElementById("chat").innerHTML = "";
   localStorage.removeItem("chatHistory");
 }
+
+window.onload = function () {
+  const history = localStorage.getItem("chatHistory");
+  if (history) {
+    document.getElementById("chat").innerHTML = history;
+  }
+};
