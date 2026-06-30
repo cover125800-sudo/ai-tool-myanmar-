@@ -100,3 +100,25 @@ function startVoice() {
 
   recognition.start();
 }
+
+// Call backend API
+const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        prompt: userMessage
+    })
+});
+
+const data = await response.json();
+
+// Remove loading
+document.getElementById("ai-loading")?.remove();
+
+if (!response.ok) {
+    throw new Error(data.error || "API Error");
+}
+
+const aiReplyText = data.reply;
