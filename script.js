@@ -87,12 +87,25 @@ function startVoice() {
 
   const recognition = new SpeechRecognition();
   recognition.lang = "my-MM";
+  recognition.continuous = false;
   recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
 
-  recognition.onresult = function (event) {
-    prompt.value = event.results[0][0].transcript;
+  recognition.onstart = () => {
+    console.log("Listening...");
+  };
+
+  recognition.onresult = (event) => {
+    const text = event.results[0][0].transcript;
+    prompt.value = text;
     sendMessage();
+  };
+
+  recognition.onerror = (event) => {
+    alert("Voice Error: " + event.error);
+  };
+
+  recognition.onend = () => {
+    console.log("Voice End");
   };
 
   recognition.start();
