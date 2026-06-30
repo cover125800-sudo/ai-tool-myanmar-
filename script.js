@@ -8,12 +8,24 @@ async function askAI() {
   result.innerHTML += `<div><b>🧑 သင်:</b> ${prompt}</div>`;
   promptInput.value = "";
 
-  result.innerHTML += `
-    <div id="loading" class="loading">
-      <span class="spinner"></span>
-      <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
-    </div>
-  `;
+  const aiReply = data.reply || data.error;
+
+result.innerHTML += `<div id="ai-message"><b>🤖 AI:</b> <span id="typing"></span></div><hr>`;
+
+const typing = document.getElementById("typing");
+let i = 0;
+
+const timer = setInterval(() => {
+  typing.textContent += aiReply.charAt(i);
+  i++;
+
+  result.scrollTop = result.scrollHeight;
+
+  if (i >= aiReply.length) {
+    clearInterval(timer);
+    localStorage.setItem("chatHistory", result.innerHTML);
+  }
+}, 20);
 
   result.scrollTop = result.scrollHeight;
 
