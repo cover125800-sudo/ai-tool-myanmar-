@@ -1,29 +1,56 @@
-// api/chat.js (Backend API သီးသန့်ကုဒ်)
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'POST method သာ လက်ခံပါသည်' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const { userMessage } = req.body;
+    const { prompt } = req.body;
 
-    if (!userMessage) {
-      return res.status(400).json({ error: 'Message payload မပါရှိပါ' });
+    if (!prompt) {
+      return res.status(400).json({
+        error: "Message is required."
+      });
     }
 
-    // 💡 ဒီနေရာမှာ သင့်ရဲ့ မူလ AI Prompt/Key ကို ထည့်သွင်းနိုင်ပါတယ်
-    // အခု လောလောဆယ် စမ်းသပ်ဖို့ Mock Text ပြန်ပေးထားတာပါ
-    const aiReplyText = `AI မှ တုံ့ပြန်ချက်: ${userMessage}`;
-    const currentTime = new Date().toLocaleTimeString();
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "llama-3.3-70b-versatile",
+          messages: [
+            {
+              role: "system",
+              content: "Reply in the same language as the user's message."
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ]
+        })
+      }
+    );
 
-    // Frontend ဘက်က UI မှာ သုံးဖို့အတွက် data ကို JSON နဲ့ပဲ ပြန်ပို့ရပါမယ်
-    return res.status(200).json({ 
-      aiReplyText: aiReplyText, 
-      currentTime: currentTime 
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json(data);
+    }
+
+    return res.status(200).json({
+      reply: data.choices[0].message.content
     });
 
   } catch (error) {
-    console.error("API Error:", error);
-    return res.status(500).json({ error: error.message });
+    console.error(error);
+
+    return res.status(500).json({
+      error: "Internal Server Error"
+    });
   }
 }
