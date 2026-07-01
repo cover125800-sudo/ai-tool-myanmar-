@@ -154,3 +154,45 @@ button:hover {
 .message.ai code {
   font-family: monospace;
 }
+
+.message {
+  max-width: 85%;
+  padding: 14px 18px;
+  margin: 14px 0;
+  border-radius: 18px;
+  line-height: 1.7;
+  word-wrap: break-word;
+  animation: fadeIn 0.25s ease;
+}
+
+.user {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  margin-left: auto;
+  color: white;
+  border-bottom-right-radius: 6px;
+}
+
+.ai {
+  background: #1e293b;
+  border: 1px solid #334155;
+  margin-right: auto;
+  color: #fff;
+  border-bottom-left-radius: 6px;
+}
+
+.message img {
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
