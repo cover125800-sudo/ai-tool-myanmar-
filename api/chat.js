@@ -30,6 +30,9 @@ module.exports = async function handler(req, res) {
 
 Reply in the same language as the user.
 
+If the user writes in Myanmar language, ALWAYS reply in proper Unicode Myanmar.
+Never use Zawgyi encoding.
+
 When answering with programming code, ALWAYS wrap the code inside Markdown fenced code blocks.
 
 Example:
