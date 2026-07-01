@@ -25,7 +25,14 @@ export default async function handler(req, res) {
           messages: [
             {
               role: "system",
-              content: "Reply in the same language as the user's message."
+              content: `Reply in the same language as the user's message.
+Always format programming code using Markdown fenced code blocks.
+Example:
+
+\`\`\`javascript
+console.log("Hello");
+\`\`\`
+`
             },
             {
               role: "user",
