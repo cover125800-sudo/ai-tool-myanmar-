@@ -24,16 +24,24 @@ export default async function handler(req, res) {
           model: "llama-3.3-70b-versatile",
           messages: [
             {
-              role: "system",
-              content: `Reply in the same language as the user's message.
-Always format programming code using Markdown fenced code blocks.
+              {
+  role: "system",
+  content: `You are a helpful AI assistant.
+
+Reply in the same language as the user.
+
+When answering with programming code, ALWAYS wrap the code inside Markdown fenced code blocks.
+
 Example:
 
 \`\`\`javascript
-console.log("Hello");
+function hello() {
+  console.log("Hello World");
+}
 \`\`\`
-`
-            },
+
+Never return raw code without the triple backticks.`
+}
             {
               role: "user",
               content: prompt
