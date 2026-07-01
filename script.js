@@ -62,7 +62,6 @@ async function sendMessage() {
   }
 }
 
-// Chat History စနစ်
 window.onload = () => {
   const history = localStorage.getItem("chatHistory");
   if (history) {
