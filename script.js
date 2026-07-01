@@ -96,26 +96,3 @@ function startVoice() {
   };
 }
 
-async function generate() {
-  const product = document.getElementById("product").value;
-  const audience = document.getElementById("audience").value;
-  const platform = document.getElementById("platform").value;
-
-  const prompt = `
-Product: ${product}
-Audience: ${audience}
-Platform: ${platform}
-
-Generate a high converting ad copy.
-`;
-
-  const res = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ prompt })
-  });
-
-  const data = await res.json();
-
-  document.getElementById("output").innerText = data.reply;
-}
