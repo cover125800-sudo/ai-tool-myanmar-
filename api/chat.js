@@ -24,10 +24,9 @@ module.exports = async function handler(req, res) {
         body: JSON.stringify({
           model: "llama-3.3-70b-versatile",
           messages: [
-            {
-              {
-  role: "system",
-  content: `You are a helpful AI assistant.
+  {
+    role: "system",
+    content: `You are a helpful AI assistant.
 
 Reply in the same language as the user.
 
@@ -42,12 +41,12 @@ function hello() {
 \`\`\`
 
 Never return raw code without the triple backticks.`
-}
-            {
-              role: "user",
-              content: prompt
-            }
-          ]
+  },
+  {
+    role: "user",
+    content: prompt
+  }
+]
         })
       }
     );
