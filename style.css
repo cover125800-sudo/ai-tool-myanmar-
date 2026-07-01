@@ -164,6 +164,23 @@ button:hover {
   border-bottom-left-radius: 6px;
 }
 
+.message pre {
+  background: #0d1117;
+  padding: 15px;
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+.message pre code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre;
+}
+
+.message {
+  font-family: "Noto Sans Myanmar", Arial, sans-serif;
+}
 .message img {
   max-width: 100%;
   border-radius: 12px;
@@ -180,3 +197,4 @@ button:hover {
     transform: translateY(0);
   }
 }
+
