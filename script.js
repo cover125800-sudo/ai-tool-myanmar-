@@ -62,13 +62,6 @@ async function sendMessage() {
   }
 }
 
-window.onload = () => {
-  const history = localStorage.getItem("chatHistory");
-  if (history) {
-    chat.innerHTML = history;
-  }
-};
-
 // Enter Key စနစ်
 prompt.addEventListener("keydown", function (e) {
   if (e.key === "Enter" && !e.shiftKey) {
