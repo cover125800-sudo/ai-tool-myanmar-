@@ -1,4 +1,20 @@
 const chat = document.getElementById("chat");
+function renderMarkdown(text) {
+  marked.setOptions({
+    breaks: true,
+    gfm: true
+  });
+
+  const html = marked.parse(text);
+
+  setTimeout(() => {
+    document.querySelectorAll("pre code").forEach((block) => {
+      hljs.highlightElement(block);
+    });
+  }, 0);
+
+  return html;
+}
 const prompt = document.getElementById("prompt");
 
 async function typeWriter(element, text, speed = 15) {
@@ -53,10 +69,10 @@ async function sendMessage() {
 
     // 4. API က ပြန်ပေးတဲ့ အဖြေကို ယူပြီး visual အဖြစ် ထည့်သွင်းခြင်း
     chat.innerHTML += `
-      <div class="message ai">
-        🤖 ${renderMarkdown(data.reply || data.error || "အဖြေမရပါ။")}
-      </div>
-    `;
+     const aiBox = document.createElement("div");
+aiBox.className = "message ai";
+aiBox.innerHTML = "🤖 " + renderMarkdown(data.reply || data.error || "အဖြေမရပါ။");
+chat.appendChild(aiBox);
 
     localStorage.setItem("chatHistory", chat.innerHTML);
     chat.scrollTop = chat.scrollHeight;
