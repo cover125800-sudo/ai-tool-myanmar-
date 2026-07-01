@@ -44,7 +44,7 @@ async function sendMessage() {
     // 4. API က ပြန်ပေးတဲ့ အဖြေကို ယူပြီး visual အဖြစ် ထည့်သွင်းခြင်း
     chat.innerHTML += `
       <div class="message ai">
-        🤖 ${data.reply || data.error || "အဖြေမရပါ။"}
+        🤖 ${renderMarkdown(data.reply || data.error || "အဖြေမရပါ။")}
       </div>
     `;
 
