@@ -1,6 +1,16 @@
 const chat = document.getElementById("chat");
 const prompt = document.getElementById("prompt");
 
+async function typeWriter(element, text, speed = 15) {
+  element.innerHTML = "";
+
+  for (let i = 0; i < text.length; i++) {
+    element.innerHTML += text.charAt(i);
+    chat.scrollTop = chat.scrollHeight;
+    await new Promise(resolve => setTimeout(resolve, speed));
+  }
+}
+
 async function sendMessage() {
   const message = prompt.value.trim();
   if (!message) return;
