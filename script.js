@@ -106,10 +106,7 @@ chat.scrollTop = chat.scrollHeight;
 aiBox.className = "message ai";
 chat.appendChild(aiBox);
 
-await typeWriter(
-  aiBox,
-  data.reply || data.error || "အဖြေမရပါ။"
-);
+aiBox.innerHTML = "❌ " + err.message;
     chat.scrollTop = chat.scrollHeight;
   }
 }
