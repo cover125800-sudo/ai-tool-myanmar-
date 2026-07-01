@@ -63,11 +63,14 @@ async function sendMessage() {
 
   } catch (err) {
     document.getElementById("loading")?.remove();
-    chat.innerHTML += `
-      <div class="message ai">
-        ❌ ${err.message}
-      </div>
-    `;
+    const aiBox = document.createElement("div");
+aiBox.className = "message ai";
+chat.appendChild(aiBox);
+
+await typeWriter(
+  aiBox,
+  data.reply || data.error || "အဖြေမရပါ။"
+);
     chat.scrollTop = chat.scrollHeight;
   }
 }
