@@ -69,7 +69,7 @@ async function sendMessage() {
         <span class="spinner"></span>
         <span>🤖 AI စဉ်းစားနေပါတယ်...</span>
       </div>
-    </div>
+    
   `;
   chat.scrollTop = chat.scrollHeight;
 
@@ -89,12 +89,14 @@ async function sendMessage() {
     document.getElementById("loading")?.remove();
 
     // 4. API က ပြန်ပေးတဲ့ အဖြေကို ယူပြီး visual အဖြစ် ထည့်သွင်းခြင်း
-    chat.innerHTML += `
-     const aiBox = document.createElement("div");
+    const aiBox = document.createElement("div");
 aiBox.className = "message ai";
 aiBox.innerHTML = "🤖 " + renderMarkdown(data.reply || data.error || "အဖြေမရပါ။");
+
 chat.appendChild(aiBox);
 
+localStorage.setItem("chatHistory", chat.innerHTML);
+chat.scrollTop = chat.scrollHeight;
     localStorage.setItem("chatHistory", chat.innerHTML);
     chat.scrollTop = chat.scrollHeight;
 
