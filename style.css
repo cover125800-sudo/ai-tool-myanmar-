@@ -125,3 +125,32 @@ button:hover {
     transform: rotate(360deg);
   }
 }
+
+/* Markdown Style */
+
+.message.ai h1,
+.message.ai h2,
+.message.ai h3 {
+  margin: 12px 0;
+  font-weight: bold;
+}
+
+.message.ai ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.message.ai li {
+  margin: 6px 0;
+}
+
+.message.ai pre {
+  background: #111827;
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.message.ai code {
+  font-family: monospace;
+}
