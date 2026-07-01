@@ -5,7 +5,8 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  body {
+  font-family: "Noto Sans Myanmar", Arial, sans-serif;
   background: #0f172a;
   color: #fff;
   display: flex;
