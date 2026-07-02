@@ -123,3 +123,86 @@
       <!-- AI Message တွေ ဒီမှာပေါ်မယ် -->
 
     </section>
+
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="logo">
+      🤖 <span>AI Tool Myanmar</span>
+    </div>
+
+    <button id="newChatBtn" class="new-chat-btn">
+      ➕ New Chat
+    </button>
+
+    <div id="historyList" class="history-list">
+      <!-- Chat History -->
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="themeBtn">🌙 Theme</button>
+      <button id="settingsBtn">⚙️ Settings</button>
+    </div>
+
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header -->
+    <header class="topbar">
+
+      <h1>AI Tool Myanmar</h1>
+
+      <button id="clearChatBtn">
+        🗑 Clear Chat
+      </button>
+
+    </header>
+
+    <!-- Chat -->
+    <section id="chat" class="chat">
+
+      <!-- AI Messages -->
+
+    </section>
+
+    <!-- Input -->
+    <footer class="input-area">
+
+      <button id="attachBtn" class="icon-btn">
+        📎
+      </button>
+
+      <button
+        id="micBtn"
+        class="icon-btn"
+        onclick="startVoice()">
+        🎤
+      </button>
+
+      <textarea
+        id="prompt"
+        rows="1"
+        placeholder="Ask anything...">
+      </textarea>
+
+      <button
+        id="sendBtn"
+        class="send-btn"
+        onclick="sendMessage()">
+        ➤
+      </button>
+
+    </footer>
+
+  </main>
+
+</div>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
