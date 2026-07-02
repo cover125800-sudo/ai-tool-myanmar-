@@ -190,3 +190,27 @@ body{
     cursor:pointer;
 
     transition
+
+/* ==========================
+   Mobile Responsive
+========================== */
+
+@media (max-width:768px){
+
+  .sidebar{
+    display:none;
+  }
+
+  .main{
+    width:100%;
+  }
+
+  .chat{
+    padding:16px;
+  }
+
+  .topbar{
+    padding:0 16px;
+  }
+
+}
