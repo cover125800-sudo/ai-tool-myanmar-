@@ -123,27 +123,29 @@
       <!-- AI Message တွေ ဒီမှာပေါ်မယ် -->
 
     </section>
-
-<body>
-
-<div class="app">
-
-  <aside class="sidebar">
-    ...
-  </aside>
-
-  <main class="main">
-
-    <header class="topbar">
-      ...
-    </header>
-
-    <section id="chat" class="chat">
-      <!-- AI Messages -->
-    </section>
-
     <footer class="input-area">
-      ...
+
+      <button id="attachBtn" class="icon-btn">📎</button>
+
+      <button
+        id="micBtn"
+        class="icon-btn"
+        onclick="startVoice()">
+        🎤
+      </button>
+
+      <textarea
+        id="prompt"
+        rows="1"
+        placeholder="Ask anything..."></textarea>
+
+      <button
+        id="sendBtn"
+        class="send-btn"
+        onclick="sendMessage()">
+        ➤
+      </button>
+
     </footer>
 
   </main>
@@ -152,7 +154,5 @@
 
 <script src="js/script.js"></script>
 
+</body>
 </html>
-
-
-        
