@@ -2,61 +2,264 @@
 <html lang="en">
 
 <head>
-  <!-- Basic -->
+
+  <!-- ========================= -->
+  <!-- Basic Meta -->
+  <!-- ========================= -->
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0F172A">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <meta
+    name="theme-color"
+    content="#0F172A">
+
+  <!-- ========================= -->
   <!-- SEO -->
+  <!-- ========================= -->
+
   <title>AI Tool Myanmar</title>
-  <meta name="description"
-    content="AI Tool Myanmar - Smart AI Assistant powered by Groq API. Chat, Code, Learn and Create with AI.">
-  <meta name="keywords"
-    content="AI, ChatGPT, Groq, AI Tool Myanmar, Artificial Intelligence, Coding Assistant">
-  <meta name="author" content="AI Tool Myanmar">
 
+  <meta
+    name="description"
+    content="AI Tool Myanmar is a modern AI assistant powered by Groq. Chat, Code, Translate, Learn and Create faster with AI.">
+
+  <meta
+    name="keywords"
+    content="AI, ChatGPT, Groq, Myanmar AI, AI Tool Myanmar, Artificial Intelligence">
+
+  <meta
+    name="author"
+    content="AI Tool Myanmar">
+
+  <meta
+    name="robots"
+    content="index, follow">
+
+  <!-- ========================= -->
   <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="AI Tool Myanmar">
-  <meta property="og:description"
-    content="Smart AI Assistant powered by Groq API">
-  <meta property="og:image"
-    content="https://ai-tool-myanmar.vercel.app/assets/preview.png">
-  <meta property="og:url"
-    content="https://ai-tool-myanmar.vercel.app/">
+  <!-- ========================= -->
 
+  <meta
+    property="og:type"
+    content="website">
+
+  <meta
+    property="og:title"
+    content="AI Tool Myanmar">
+
+  <meta
+    property="og:description"
+    content="Smart AI Assistant powered by Groq API">
+
+  <meta
+    property="og:url"
+    content="https://ai-tool-myanmar.vercel.app">
+
+  <meta
+    property="og:image"
+    content="https://ai-tool-myanmar.vercel.app/assets/preview.png">
+
+  <!-- ========================= -->
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="AI Tool Myanmar">
-  <meta name="twitter:description"
-    content="Smart AI Assistant powered by Groq API">
-  <meta name="twitter:image"
+  <!-- ========================= -->
+
+  <meta
+    name="twitter:card"
+    content="summary_large_image">
+
+  <meta
+    name="twitter:title"
+    content="AI Tool Myanmar">
+
+  <meta
+    name="twitter:description"
+    content="Modern AI Assistant">
+
+  <meta
+    name="twitter:image"
     content="https://ai-tool-myanmar.vercel.app/assets/preview.png">
 
+  <!-- ========================= -->
   <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.ico">
+  <!-- ========================= -->
 
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="icon"
+    href="assets/favicon.ico">
 
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- ========================= -->
+  <!-- Google Fonts -->
+  <!-- ========================= -->
 
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ========================= -->
+  <!-- Markdown -->
+  <!-- ========================= -->
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <!-- ========================= -->
   <!-- Highlight.js -->
-  <link rel="stylesheet"
+  <!-- ========================= -->
+
+  <link
+    rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js">
+  </script>
+
+  <!-- ========================= -->
   <!-- Main CSS -->
-  <link rel="stylesheet" href="style.css">
+  <!-- ========================= -->
+
+  <link
+    rel="stylesheet"
+    href="style.css">
 
 </head>
 
 <body>
 
-<header class="header">
+<!-- ========================= -->
+<!-- App -->
+<!-- ========================= -->
 
-<div class="logo">
-🤖 AI Tool Myanmar
+<div class="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="sidebar-top">
+
+      <div class="logo">
+        🤖
+        <span>AI Tool Myanmar</span>
+      </div>
+
+      <button id="newChatBtn" class="new-chat-btn">
+        ➕ New Chat
+      </button>
+
+    </div>
+
+    <nav class="history">
+
+      <h3>Recent Chats</h3>
+
+      <ul id="historyList">
+        <!-- JavaScript က Chat History ထည့်ပေးမယ် -->
+      </ul>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <button id="themeBtn">
+        🌙 Theme
+      </button>
+
+      <button id="settingsBtn">
+        ⚙️ Settings
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- Header -->
+    <header class="topbar">
+
+      <div class="title">
+        AI Tool Myanmar
+      </div>
+
+      <div class="top-actions">
+
+        <button id="clearChatBtn">
+          🗑️ Clear
+        </button>
+
+      </div>
+
+    </header>
+
+    <!-- Chat -->
+    <section
+      id="chat"
+      class="chat">
+
+    <!-- Input Area -->
+    <footer class="input-area">
+
+      <!-- Attach -->
+      <button
+        id="attachBtn"
+        class="icon-btn"
+        title="Attach File">
+        📎
+      </button>
+
+      <!-- Voice -->
+      <button
+        id="micBtn"
+        class="icon-btn"
+        onclick="startVoice()"
+        title="Voice">
+        🎤
+      </button>
+
+      <!-- Text -->
+      <textarea
+        id="prompt"
+        rows="1"
+        placeholder="Ask anything...">
+      </textarea>
+
+      <!-- Send -->
+      <button
+        id="sendBtn"
+        class="send-btn"
+        onclick="sendMessage()">
+        ➤
+      </button>
+
+    </footer>
+
+  </main>
+
 </div>
 
-<button id="newChat
+<!-- ========================= -->
+<!-- JavaScript -->
+<!-- ========================= -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+      <!-- AI Message တွေ ဒီမှာပေါ်မယ် -->
+
+    </section>
